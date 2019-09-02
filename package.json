@@ -4,8 +4,12 @@
   "description": "A To Do list",
   "main": "index.js",
   "scripts": {
-    "build": "webpack",
+    "build": "webpack -p",
+    "dev": "webpack --mode development",
+    "watch": "webpack --progress --watch",
+    "start": "webpack-dev-server --mode development --open",
     "test": "echo \"Error: no test specified\" && exit 1"
+    
   },
   "repository": {
     "type": "git",
@@ -26,5 +30,9 @@
     "style-loader": "^1.0.0",
     "webpack": "^4.39.3",
     "webpack-cli": "^3.3.7"
+  },
+  "dependencies": {
+    "date-fns": "^2.0.1",
+    "materialize-css": "^1.0.0-rc.2"
   }
 }
