@@ -10,35 +10,35 @@ export default class TodoItem {
 		};
 	};
 
-	const getTitle = () => {
+	getTitle() {
 		return this.title;
 	};
 
-	const setTitle = (title) => {
+	setTitle(title) {
 		this.title = title;
 	};
 
-	const getDescription = () => {
+	getDescription() {
 		return this.description;
 	};
 
-	const setDescription = (des) => {
+	setDescription(des) {
 		this.description = des;
 	};
 
-	const getDueDate = () => {
+	getDueDate() {
 		return this.dueDate;
 	};
 
-	const setDueDate = (date) => {
+	setDueDate(date) {
 		this.dueDate = date;
 	};
 
-	const getPriority = () => {
+	getPriority() {
 		return this.priority;
 	};
 
-	const setPriority = (priority) => {
+	setPriority(priority) {
 		if (this.validPriority(priority)) {
 			this.priority = priority;
 		}
