@@ -1,0 +1,30 @@
+{
+  "name": "afazeres",
+  "version": "1.0.0",
+  "description": "A To Do list",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adriaanbd/afazeres.git"
+  },
+  "author": "Adriaan Beiertz and Maya Douglas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adriaanbd/afazeres/issues"
+  },
+  "homepage": "https://github.com/adriaanbd/afazeres#readme",
+  "devDependencies": {
+    "css-loader": "^3.2.0",
+    "eslint": "^6.3.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "sass-loader": "^8.0.0",
+    "style-loader": "^1.0.0",
+    "webpack": "^4.39.3",
+    "webpack-cli": "^3.3.7"
+  }
+}
