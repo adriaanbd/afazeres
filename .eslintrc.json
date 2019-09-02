@@ -15,5 +15,6 @@
         "sourceType": "module"
     },
     "rules": {
+        "ts(8009)": "off"
     }
 }
