@@ -6,10 +6,9 @@
   "scripts": {
     "build": "webpack -p",
     "dev": "webpack --mode development",
-    "watch": "webpack --progress --watch",
+    "watch": "webpack --progress --watch --mode development",
     "start": "webpack-dev-server --mode development --open",
     "test": "echo \"Error: no test specified\" && exit 1"
-    
   },
   "repository": {
     "type": "git",
