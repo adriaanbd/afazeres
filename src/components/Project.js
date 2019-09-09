@@ -20,4 +20,12 @@ export default class Project {
   setDescription(description) {
     this.description = description;
   }
+
+  addItem(item) {
+    this.toDoList.push(item);
+  }
+  
+  removeItem(pos) {
+    this.toDoList(pos, 1);
+  }
 }
