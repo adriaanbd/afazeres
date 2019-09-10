@@ -1,8 +1,11 @@
 import TodoItem from './components/TodoItem';
 import Header from './interface/Header';
+import Footer from './interface/Footer';
 
 const content = document.querySelector('#content');
-const header = new Header('To Do App');
+const appTitle = 'Afazeres';
+const header = new Header(appTitle);
+const footer = new Footer(appTitle, 2019);
 
 const todo = new TodoItem('Todo 1', 'Something to do', 'a date');
 
@@ -17,3 +20,4 @@ getTodoAttr(todo);
 
 const nav = header.createNav();
 content.appendChild(nav);
+content.appendChild(footer.generateFooter());
