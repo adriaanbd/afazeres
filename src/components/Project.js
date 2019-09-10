@@ -24,7 +24,7 @@ export default class Project {
   addItem(item) {
     this.toDoList.push(item);
   }
-  
+
   removeItem(pos) {
     this.toDoList(pos, 1);
   }
