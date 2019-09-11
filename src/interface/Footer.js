@@ -1,15 +1,16 @@
+import PageBuilder from './PageBuilder';
+
 export default class Footer {
   constructor(title, year) {
     this.footer = document.createElement('footer');
-    this.p = document.createElement('p');
-    this.footetText = () => `${title} &copy;${year}`;
+    this.footerText = () => `${title} &copy;${year}`;
+    this.pageBuilder = new PageBuilder();
   }
 
   generateFooter() {
+    const p = this.pageBuilder.generateP(this.footerText(), 'flow-text');
     this.footer.className = 'section purple darken-1 white-text center';
-    this.p.className = 'flow-text';
-    this.p.innerHTML = this.footetText();
-    this.footer.appendChild(this.p);
+    this.footer.appendChild(p);
     return this.footer;
   }
 }

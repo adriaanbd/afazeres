@@ -1,7 +1,6 @@
 export default class MainContent {
-  constructor(parent, content) {
+  constructor(content) {
     this.content = content;
-    this.parent = parent;
   }
 
   setContent(content) {
