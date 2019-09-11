@@ -6,7 +6,7 @@ export default class Footer {
   }
 
   generateFooter() {
-    this.footer.className = 'section purple white-text center';
+    this.footer.className = 'section purple darken-1 white-text center';
     this.p.className = 'flow-text';
     this.p.innerHTML = this.footetText();
     this.footer.appendChild(this.p);
