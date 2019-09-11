@@ -26,6 +26,10 @@ export default class Project {
   }
 
   removeItem(pos) {
-    this.toDoList(pos, 1);
+    this.toDoList.splice(pos, 1);
+  }
+
+  getList() {
+    return this.toDoList;
   }
 }

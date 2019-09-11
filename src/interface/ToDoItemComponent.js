@@ -1,9 +1,9 @@
 import PageBuilder from './PageBuilder';
 
 export default class TodoItemComponent {
-  constructor() {
+  constructor(todoItem) {
     this.pageBuilder = new PageBuilder();
-    this.item = this.pageBuilder.generateDiv();
+    this.wrapper = this.pageBuilder.generateDiv();
   }
 
   generateItemDOM() {
