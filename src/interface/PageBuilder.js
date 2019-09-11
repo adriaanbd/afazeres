@@ -1,7 +1,7 @@
 export default class PageBuilder {
   constructor() {
     this.createDiv = (divClass, divID) => {
-      const div = document.createElement(div);
+      const div = document.createElement('div');
       div.className = divClass;
       div.id = divID;
       return div;
