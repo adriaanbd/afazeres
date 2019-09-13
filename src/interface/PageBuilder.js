@@ -3,7 +3,7 @@ export default class PageBuilder {
     this.createDiv = (divClass, divID) => {
       const div = document.createElement('div');
       div.className = divClass;
-      div.id = divID;
+      if (divID) div.id = divID;
       return div;
     };
 

@@ -5,13 +5,14 @@ export default class ProjectComponent {
   constructor(todoItems) {
     this.pageBuilder = new PageBuilder();
     this.todoItems = todoItems;
-    this.cardContent = this.pageBuilder.generateDiv();
-    this.generateList = () => {
-      todoItems.forEach((item) => {
-        const div = new TodoItemComponent(item);
+    this.cardContent = this.pageBuilder.generateDiv('list-items');
+    this.generateList = (() => {
+      this.todoItems.forEach((item) => {
+        const itemDOM = new TodoItemComponent(item);
+        const div = itemDOM.generateItemDOM();
         this.cardContent.appendChild(div);
       });
-    };
+    })();
   }
 
   generateProjectDOM() {
