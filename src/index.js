@@ -15,7 +15,7 @@ const footer = new Footer(appTitle, 2019);
 const todo = new TodoItem('Todo 1', 'Something to do', 'a date');
 const testProject = new Project('Test Project', 'Testing stuff');
 testProject.addItem(todo);
-const testProjectGenerator = new ProjectComponent(testProject.getList());
+const testProjectGenerator = new ProjectComponent(testProject);
 const testProjectDOM = testProjectGenerator.generateProjectDOM();
 
 

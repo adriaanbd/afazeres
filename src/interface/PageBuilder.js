@@ -13,6 +13,32 @@ export default class PageBuilder {
       p.innerHTML = content;
       return p;
     };
+
+    this.createUl = (ulClass, id) => {
+      const ul = document.createElement('ul');
+
+      if (ulClass) ul.className = ulClass;
+      if (id) ul.id = id;
+
+      return ul;
+    };
+
+    this.createLi = (content, liClass, id) => {
+      const li = document.createElement('li');
+
+      if (content) li.innerHTML = content;
+      if (liClass) li.className = liClass;
+      if (id) li.id = id;
+
+      return li;
+    };
+
+    this.createHeader = (size, content) => {
+      const header = document.createElement(`h${size}`);
+      if (content) header.innerHTML = content;
+      console.log(header);
+      return header;
+    };
   }
 
   generateDiv(divClass = '', divID = '') {
@@ -29,5 +55,17 @@ export default class PageBuilder {
 
   generateP(content, pClass = '') {
     return this.createP(content, pClass);
+  }
+
+  generateUl(ulClass = '', id = '') {
+    return this.createUl(ulClass, id);
+  }
+
+  generateLi(content = '', liClass = '', id = '') {
+    return this.createLi(content, liClass, id);
+  }
+
+  generateHeader(size, content = '') {
+    return this.createHeader(size, content);
   }
 }
