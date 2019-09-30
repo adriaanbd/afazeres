@@ -1,12 +1,11 @@
+import M from 'materialize-css';
 import TodoItem from './components/TodoItem';
 import Project from './components/Project';
 import Header from './interface/Header';
 import Footer from './interface/Footer';
 import MainContent from './interface/MainContent';
-import PageBuilder from './interface/PageBuilder';
 import ProjectComponent from './interface/ProjectComponent';
 
-const pageBuilder = new PageBuilder();
 const content = document.querySelector('#content');
 const appTitle = 'Afazeres';
 const header = new Header(appTitle);
@@ -18,11 +17,6 @@ testProject.addItem(todo);
 const testProjectGenerator = new ProjectComponent(testProject);
 const testProjectDOM = testProjectGenerator.generateProjectDOM();
 
-
-const test = document.createElement('h1');
-
-test.innerHTML = 'Hello WOrld';
-console.log(testProjectDOM);
 const main = new MainContent(testProjectDOM);
 const getTodoAttr = (todoInstance) => [
   todoInstance.getTitle(),
@@ -38,5 +32,10 @@ const generateMainSkeleton = () => {
   content.appendChild(main.generateContent());
   content.appendChild(footer.generateFooter());
 };
+
+document.addEventListener('DOMContentLoaded', () => {
+  const elems = document.querySelectorAll('.modal');
+  M.Modal.init(elems);
+});
 
 generateMainSkeleton();
