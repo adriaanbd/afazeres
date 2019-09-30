@@ -7,6 +7,7 @@ import MainContent from './interface/MainContent';
 import ProjectComponent from './interface/ProjectComponent';
 
 const content = document.querySelector('#content');
+
 const appTitle = 'Afazeres';
 const header = new Header(appTitle);
 const footer = new Footer(appTitle, 2019);
@@ -39,3 +40,15 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 generateMainSkeleton();
+
+const form = document.querySelector('form');
+const newProjBtn = document.querySelector('#new_project');
+
+newProjBtn.addEventListener('click', () => {
+  const title = document.querySelector('#form_title');
+  const description = document.querySelector('#form_description');
+  const Proj = new Project(title.value, description.value);
+  const ProjectGenerator = new ProjectComponent(Proj);
+  const ProjectDOM = ProjectGenerator.generateProjectDOM();
+  const main = new MainContent(ProjectDOM);
+});
