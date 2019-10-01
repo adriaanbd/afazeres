@@ -5,6 +5,7 @@ import Header from './interface/Header';
 import Footer from './interface/Footer';
 import MainContent from './interface/MainContent';
 import ProjectComponent from './interface/ProjectComponent';
+import PageBuilder from './interface/PageBuilder';
 
 const content = document.querySelector('#content');
 
@@ -50,5 +51,6 @@ newProjBtn.addEventListener('click', () => {
   const Proj = new Project(title.value, description.value);
   const ProjectGenerator = new ProjectComponent(Proj);
   const ProjectDOM = ProjectGenerator.generateProjectDOM();
-  const main = new MainContent(ProjectDOM);
+  main.setContent(ProjectDOM);
+  generateMainSkeleton();
 });
