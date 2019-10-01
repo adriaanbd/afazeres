@@ -7,6 +7,8 @@ import MainContent from './interface/MainContent';
 import ProjectComponent from './interface/ProjectComponent';
 import PageBuilder from './interface/PageBuilder';
 
+const pb = new PageBuilder();
+
 const content = document.querySelector('#content');
 
 const appTitle = 'Afazeres';
@@ -15,11 +17,13 @@ const footer = new Footer(appTitle, 2019);
 
 const todo = new TodoItem('Todo 1', 'Something to do', 'a date');
 const testProject = new Project('Test Project', 'Testing stuff');
+const projectsDiv = pb.generateDiv('projects', 'projects');
 testProject.addItem(todo);
 const testProjectGenerator = new ProjectComponent(testProject);
 const testProjectDOM = testProjectGenerator.generateProjectDOM();
+projectsDiv.appendChild(testProjectDOM);
 
-const main = new MainContent(testProjectDOM);
+const main = new MainContent(projectsDiv);
 const getTodoAttr = (todoInstance) => [
   todoInstance.getTitle(),
   todoInstance.getDescription(),
@@ -48,9 +52,10 @@ const newProjBtn = document.querySelector('#new_project');
 newProjBtn.addEventListener('click', () => {
   const title = document.querySelector('#form_title');
   const description = document.querySelector('#form_description');
-  const Proj = new Project(title.value, description.value);
-  const ProjectGenerator = new ProjectComponent(Proj);
-  const ProjectDOM = ProjectGenerator.generateProjectDOM();
-  main.setContent(ProjectDOM);
-  generateMainSkeleton();
+  const proj = new Project(title.value, description.value);
+  const projectGenerator = new ProjectComponent(proj);
+  const projectDOM = projectGenerator.generateProjectDOM();
+  projectsDiv.appendChild(projectDOM);
+  main.setContent(projectsDiv);
+  main.changeContent();
 });

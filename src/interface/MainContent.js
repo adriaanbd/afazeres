@@ -1,7 +1,7 @@
 import PageBuilder from './PageBuilder';
 
 export default class MainContent {
-  constructor(content) {
+  constructor(content = null) {
     this.pageBuilder = new PageBuilder();
     this.content = content;
     this.main = document.createElement('main');
@@ -32,9 +32,11 @@ export default class MainContent {
     return this.main;
   }
 
-  // changeContent() {
-  //   const div = document.querySelector('#changing_content');
-  //   this.contentWrapper.appendChild(this.content);
-
-  // }
+  changeContent() {
+    const div = document.querySelector('#changing_content');
+    if (div) this.main.removeChild(div);
+    this.contentWrapper.appendChild(this.content);
+    this.main.append(this.content);
+    return this.main;
+  }
 }
