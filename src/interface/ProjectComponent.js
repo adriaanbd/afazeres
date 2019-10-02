@@ -16,13 +16,18 @@ export default class ProjectComponent {
     };
   }
 
-  generateProjectDOM() {
+  generateProjectDOM(id) {
     const header = this.pageBuilder.generateHeader(4, this.title);
+    const deleteBtn = document.createElement('a');
+    deleteBtn.className = 'deleteBtn';
+    deleteBtn.href = '#';
+    deleteBtn.innerHTML = '<i class="medium material-icons">remove_circle</i>';
     const collectionHeader = this.pageBuilder.generateLi('', 'collection-header');
     collectionHeader.appendChild(header);
+    collectionHeader.appendChild(deleteBtn);
     this.cardContent.appendChild(collectionHeader);
     this.generateList();
-    const card = this.pageBuilder.generateCard(this.cardContent);
+    const card = this.pageBuilder.generateCard(this.cardContent, id);
     return card;
   }
 }
