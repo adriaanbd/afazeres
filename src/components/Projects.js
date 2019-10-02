@@ -15,8 +15,7 @@ export default class Projects {
     return this.projectList.indexOf(project);
   }
 
-  removeProject(project) {
-    const index = this.projectList.indexOf(project);
-    this.projectList.splice(index, 1);
+  removeProject(pos) {
+    this.projectList.splice(pos, 1);
   }
 }
