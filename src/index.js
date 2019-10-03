@@ -16,23 +16,8 @@ const appTitle = 'Afazeres';
 const header = new Header(appTitle);
 const footer = new Footer(appTitle, 2019);
 
-const todo = new TodoItem('Todo 1', 'Something to do', 'a date');
-const testProject = new Project('Test Project', 'Testing stuff');
 const projectsDiv = pb.generateDiv('projects', 'projects');
-testProject.addItem(todo);
-const testProjectGenerator = new ProjectComponent(testProject);
-const testProjectDOM = testProjectGenerator.generateProjectDOM();
-projectsDiv.appendChild(testProjectDOM);
-
 const main = new MainContent(projectsDiv);
-const getTodoAttr = (todoInstance) => [
-  todoInstance.getTitle(),
-  todoInstance.getDescription(),
-  todoInstance.getDueDate(),
-  todoInstance.getPriority(),
-];
-
-getTodoAttr(todo);
 
 const generateMainSkeleton = () => {
   content.appendChild(header.createNav());
@@ -58,7 +43,8 @@ const addDeleteListeners = () => {
     btn.addEventListener('click', () => {
       const card = document.querySelector(`#card-${btn.id}`);
       card.remove();
-      projects.removeProject(btn.id); // generate cards || projectDOM again because splice changes indexes when modifying array in place
+      projects.removeProject(btn.id);
+      // generate cards || projectDOM again
     });
   });
 };
