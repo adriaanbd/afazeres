@@ -36,7 +36,6 @@ export default class PageBuilder {
     this.createHeader = (size, content) => {
       const header = document.createElement(`h${size}`);
       if (content) header.innerHTML = content;
-      console.log(header);
       return header;
     };
   }
