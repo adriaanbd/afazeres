@@ -21,6 +21,7 @@ export default class ProjectComponent {
     const deleteBtn = document.createElement('a');
     deleteBtn.href = '#';
     deleteBtn.innerHTML = '<i class="medium material-icons deleteBtn">remove_circle</i>';
+    [deleteBtn.id] = id.match(/\d+$/);
     const collectionHeader = this.pageBuilder.generateLi('', 'collection-header');
     collectionHeader.appendChild(header);
     collectionHeader.appendChild(deleteBtn);
