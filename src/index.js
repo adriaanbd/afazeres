@@ -8,15 +8,15 @@ import MainContent from './interface/MainContent';
 import ProjectComponent from './interface/ProjectComponent';
 import PageBuilder from './interface/PageBuilder';
 
-const pb = new PageBuilder();
-
-const content = document.querySelector('#content');
-
 const appTitle = 'Afazeres';
+
+const pb = new PageBuilder();
+const projects = new Projects();
 const header = new Header(appTitle);
 const footer = new Footer(appTitle, 2019);
 
 const projectsDiv = pb.generateDiv('projects', 'projects');
+const content = document.querySelector('#content');
 const main = new MainContent(projectsDiv);
 
 const generateMainSkeleton = () => {
@@ -32,19 +32,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
 generateMainSkeleton();
 
+
 const newProjBtn = document.querySelector('#new_project');
 
-const projects = new Projects();
 let deleteBtns = document.querySelectorAll('.deleteBtn');
+
+const generateProject = (project) => {
+  const projectGenerator = new ProjectComponent(project);
+  const projectIdx = projects.getProjectIndex(project);
+  const projectDOMid = `card-${projectIdx}`;
+  const projectDOM = projectGenerator.generateProjectDOM(projectDOMid);
+  projectsDiv.appendChild(projectDOM);
+  main.setContent(projectsDiv);
+  main.changeContent();
+};
+
+const generateProjects = (projects) => {
+  projects.forEach((project) => {
+    generateProject(project);
+  });
+};
 
 const addDeleteListeners = () => {
   deleteBtns = document.querySelectorAll('.deleteBtn');
   deleteBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
-      const card = document.querySelector(`#card-${btn.id}`);
-      card.remove();
+      const card = document.querySelector(`#card-${btn.parentNode.id}`);
       projects.removeProject(btn.id);
-      // generate cards || projectDOM again
+      card.remove();
+      generateProjects(projects.getProjects()); // generate projectDOM again
     });
   });
 };
@@ -52,20 +68,8 @@ const addDeleteListeners = () => {
 newProjBtn.addEventListener('click', () => {
   const title = document.querySelector('#form_title');
   const description = document.querySelector('#form_description');
-  const proj = new Project(title.value, description.value);
-  projects.addProject(proj);
-
-  const projectGenerator = new ProjectComponent(proj);
-  const projectIdx = projects.getProjectIndex(proj);
-  const projectDOM = projectGenerator.generateProjectDOM();
-  projectDOM.id = `card-${projectIdx}`;
-
-  const delBtn = projectDOM.querySelector('.deleteBtn');
-  delBtn.id = projectIdx;
-
-  projectsDiv.appendChild(projectDOM);
-  main.setContent(projectsDiv);
-  main.changeContent();
-
+  const project = new Project(title.value, description.value);
+  projects.addProject(project);
+  generateProject(project);
   addDeleteListeners();
 });
