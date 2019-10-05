@@ -38,6 +38,18 @@ export default class PageBuilder {
       if (content) header.innerHTML = content;
       return header;
     };
+
+    this.createButton = (iconName, className, id) => {
+      const element = document.createElement('a');
+      element.innerHTML = `<i class="medium material-icons ${className}">${iconName}</i>`;
+      element.href = '#';
+      if (id) [element.id] = id.match(/\d+$/);
+      return element;
+    };
+  }
+
+  generateButton(iconName, className, id = '') {
+    return this.createButton(iconName, className, id);
   }
 
   generateDiv(divClass = '', divID = '') {
