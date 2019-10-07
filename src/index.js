@@ -35,15 +35,14 @@ generateMainSkeleton();
 
 const newProjBtn = document.querySelector('#new_project');
 
-let deleteBtns = document.querySelectorAll('.deleteBtn');
-
 const generateProject = (project) => {
   const projectGenerator = new ProjectComponent(project);
   const projectIdx = projects.getProjectIndex(project);
   const projectDOMid = `card-${projectIdx}`;
   const projectDOM = projectGenerator.generateProjectDOM(projectDOMid);
-  projectsDiv.appendChild(projectDOM);
-  main.setContent(projectsDiv);
+  const projectsNode = document.querySelector('#projects');
+  projectsNode.appendChild(projectDOM);
+  main.setContent(projectsNode);
   main.changeContent();
 };
 
@@ -51,16 +50,19 @@ const generateProjects = (projects) => {
   projects.forEach((project) => {
     generateProject(project);
   });
+  if (projects) addDeleteListeners();
 };
 
+
 const addDeleteListeners = () => {
-  deleteBtns = document.querySelectorAll('.deleteBtn');
+  const deleteBtns = document.querySelectorAll('.deleteBtn');
   deleteBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
-      const card = document.querySelector(`#card-${btn.parentNode.id}`);
-      projects.removeProject(btn.id);
-      card.remove();
-      generateProjects(projects.getProjects()); // generate projectDOM again
+      const { id } = btn.parentNode;
+      projects.removeProject(id);
+      const projectsNode = document.querySelector('#projects');
+      projectsNode.innerHTML = '';
+      generateProjects(projects.getProjects());
     });
   });
 };
