@@ -1,4 +1,5 @@
 import M from 'materialize-css';
+import './sass/style.scss';
 import TodoItem from './components/TodoItem';
 import Project from './components/Project';
 import Projects from './components/Projects';
