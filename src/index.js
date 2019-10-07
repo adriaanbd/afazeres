@@ -53,16 +53,19 @@ const generateProjects = (projects) => {
   if (projects) addDeleteListeners();
 };
 
-
 const addDeleteListeners = () => {
   const deleteBtns = document.querySelectorAll('.deleteBtn');
   deleteBtns.forEach((btn) => {
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', (event) => {
       const { id } = btn.parentNode;
       projects.removeProject(id);
       const projectsNode = document.querySelector('#projects');
-      projectsNode.innerHTML = '';
+      while (projectsNode.firstChild) {
+        projectsNode.removeChild(projectsNode.firstChild);
+      }
+
       generateProjects(projects.getProjects());
+      event.stopImmediatePropagation();
     });
   });
 };
