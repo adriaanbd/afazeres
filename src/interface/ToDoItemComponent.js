@@ -4,7 +4,6 @@ export default class TodoItemComponent {
   constructor(todoItem) {
     this.item = todoItem;
     this.pageBuilder = new PageBuilder();
-    // this.wrapper = this.pageBuilder.generateDiv('list-item');
   }
 
   generateItemDOM() {

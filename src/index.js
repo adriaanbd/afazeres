@@ -82,6 +82,3 @@ newProjBtn.addEventListener('click', () => {
   addDeleteListeners();
 });
 
-// newTodobtn.addEventListener('click', () => {
-
-// });
