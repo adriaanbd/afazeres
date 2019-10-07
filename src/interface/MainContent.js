@@ -23,9 +23,15 @@ export default class MainContent {
     form.className = 'modal-content';
     form.innerHTML = '<div class="row"><div class="input-field col s12"><input  id="form_title" type="text" class="validate"><label for="title">Title</label></div><div class="input-field col s12"><input id="form_description" type="text" class="validate"><label for="description">Description</label></div></div><div class="modal-footer"><a href="#!" class="modal-close waves-effect waves-green btn-flat" id="new_project">Create New Project</a></div>';
     button.innerHTML = 'New Project';
+    const newItem = this.pageBuilder.generateDiv('modal', 'newItem');
+    const toDoForm = document.createElement('form');
+    toDoForm.className = 'modal-content';
+    toDoForm.innerHTML = '<div class="row"><div class="input-field col s12"><input  id="form_title" type="text" class="validate"><label for="title">Title</label></div><div class="input-field col s12"><input id="form_description" type="text" class="validate"><label for="description">Description</label></div></div><div class="modal-footer"><a href="#!" class="modal-close waves-effect waves-green btn-flat" id="new_project">Create New Project</a></div>';
+    newItem.appendChild(toDoForm);
+
 
     newProject.appendChild(form);
-    this.main.append(button, newProject);
+    this.main.append(button, newProject, newItem);
     if (div) this.main.removeChild(div);
     this.contentWrapper.appendChild(this.content);
     this.main.append(this.contentWrapper);

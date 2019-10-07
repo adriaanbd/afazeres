@@ -14,14 +14,28 @@ export default class ProjectComponent {
         this.cardContent.appendChild(li);
       });
     };
+    this.generateToDoForm = () => {
+      const newItem = this.pageBuilder.generateDiv('modal', 'newItem');
+      const form = document.createElement('form');
+      form.className = 'modal-content';
+      form.innerHTML = '<div class="row"><div class="input-field col s12"><input  id="form_title" type="text" class="validate"><label for="title">Title</label></div><div class="input-field col s12"><input id="form_description" type="text" class="validate"><label for="description">Description</label></div></div><div class="modal-footer"><a href="#!" class="modal-close waves-effect waves-green btn-flat" id="new_project">Create New Project</a></div>';
+      newItem.appendChild(form);
+      return newItem;
+    };
   }
 
   generateProjectDOM(id) {
     const header = this.pageBuilder.generateHeader(4, this.title);
-    const deleteBtn = this.pageBuilder.generateButton('remove_circle', 'deleteBtn', id);
+    const deleteBtn = this.pageBuilder.generateButton('remove_circle', 'deleteBtn modal-trigger', id);
+    const addBtn = this.pageBuilder.generateButton('add_circle', 'addItemBtn', id);
+    addBtn.href = '#newItem';
+    const form = this.generateToDoForm();
+    // addBtn.addEventListener('click', (event) => {
+      
+    // });
     const collectionHeader = this.pageBuilder.generateLi('', 'collection-header');
     collectionHeader.appendChild(header);
-    collectionHeader.appendChild(deleteBtn);
+    collectionHeader.append(addBtn, deleteBtn);
     this.cardContent.appendChild(collectionHeader);
     this.generateList();
     const card = this.pageBuilder.generateCard(this.cardContent, id);
