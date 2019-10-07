@@ -8,7 +8,7 @@ export default class ProjectComponent {
     this.todoItems = project.getList();
     this.cardContent = this.pageBuilder.generateUl('collection with-header');
     this.generateList = () => {
-      this.todoItems.forEach((item) => {
+      project.getList().forEach((item) => {
         const itemDOM = new TodoItemComponent(item);
         const li = itemDOM.generateItemDOM();
         this.cardContent.appendChild(li);

@@ -15,6 +15,7 @@ const pb = new PageBuilder();
 const projects = new Projects();
 const header = new Header(appTitle);
 const footer = new Footer(appTitle, 2019);
+const todoitem = new TodoItem('go to store', 'someone needsto go to the store to buy groceries', 'date is the is date');
 
 const projectsDiv = pb.generateDiv('projects', 'projects');
 const content = document.querySelector('#content');
@@ -37,6 +38,7 @@ generateMainSkeleton();
 const newProjBtn = document.querySelector('#new_project');
 
 const generateProject = (project) => {
+  project.addItem(todoitem);
   const projectGenerator = new ProjectComponent(project);
   const projectIdx = projects.getProjectIndex(project);
   const projectDOMid = `card-${projectIdx}`;
@@ -54,6 +56,7 @@ const generateProjects = (projects) => {
   if (projects) addDeleteListeners();
 };
 
+
 const addDeleteListeners = () => {
   const deleteBtns = document.querySelectorAll('.deleteBtn');
   deleteBtns.forEach((btn) => {
@@ -64,7 +67,6 @@ const addDeleteListeners = () => {
       while (projectsNode.firstChild) {
         projectsNode.removeChild(projectsNode.firstChild);
       }
-
       generateProjects(projects.getProjects());
       event.stopImmediatePropagation();
     });
@@ -79,3 +81,7 @@ newProjBtn.addEventListener('click', () => {
   generateProject(project);
   addDeleteListeners();
 });
+
+// newTodobtn.addEventListener('click', () => {
+
+// });
