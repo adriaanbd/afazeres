@@ -18,7 +18,7 @@ export default class ProjectComponent {
 
   generateProjectDOM(id) {
     const header = this.pageBuilder.generateHeader(4, this.title);
-    const deleteBtn = this.pageBuilder.generateButton('remove_cirlce', 'deleteBtn', id);
+    const deleteBtn = this.pageBuilder.generateButton('remove_circle', 'deleteBtn', id);
     const collectionHeader = this.pageBuilder.generateLi('', 'collection-header');
     collectionHeader.appendChild(header);
     collectionHeader.appendChild(deleteBtn);
