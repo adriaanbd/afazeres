@@ -26,7 +26,23 @@ export default class MainContent {
     const newItem = this.pageBuilder.generateDiv('modal', 'newItem');
     const toDoForm = document.createElement('form');
     toDoForm.className = 'modal-content';
-    toDoForm.innerHTML = '<div class="row"><div class="input-field col s12"><input  id="form_title" type="text" class="validate"><label for="title">Title</label></div><div class="input-field col s12"><input id="form_description" type="text" class="validate"><label for="description">Description</label></div></div><div class="modal-footer"><a href="#!" class="modal-close waves-effect waves-green btn-flat" id="new_project">Create New Project</a></div>';
+    toDoForm.innerHTML = `
+    <div class="row">
+      <div class="input-field col s12">
+        <input  id="item_title" type="text" class="validate">
+        <label for="item_title">Title</label>
+      </div>
+      <div class="input-field col s12">
+        <input id="item_description" type="text" class="validate">
+        <label for="item_description">Description</label>
+      </div>
+      <div class="input-field col s12">
+        <input  id="item_date" type="date" class="validate"><label for="item_date">Title</label>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat" id="new_item">Add New Item</a>
+    </div>`;
     newItem.appendChild(toDoForm);
 
 

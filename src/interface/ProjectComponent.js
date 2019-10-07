@@ -26,10 +26,11 @@ export default class ProjectComponent {
 
   generateProjectDOM(id) {
     const header = this.pageBuilder.generateHeader(4, this.title);
-    const deleteBtn = this.pageBuilder.generateButton('remove_circle', 'deleteBtn modal-trigger', id);
-    const addBtn = this.pageBuilder.generateButton('add_circle', 'addItemBtn', id);
+    const deleteBtn = this.pageBuilder.generateButton('remove_circle', 'deleteBtn', id);
+    const addBtn = this.pageBuilder.generateButton('add_circle', 'add_icon', id);
+    addBtn.className = 'modal-trigger';
+    
     addBtn.href = '#newItem';
-    const form = this.generateToDoForm();
     // addBtn.addEventListener('click', (event) => {
       
     // });
