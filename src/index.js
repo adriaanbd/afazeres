@@ -50,28 +50,24 @@ const generateProject = (project) => {
 };
 
 const generateProjects = (projects) => {
-  projects.forEach((project) => {
-    generateProject(project);
-  });
-  if (projects) addDeleteListeners();
+  projects.forEach((project) => generateProject(project));
 };
 
-
-const addDeleteListeners = () => {
-  const deleteBtns = document.querySelectorAll('.deleteBtn');
-  deleteBtns.forEach((btn) => {
-    btn.addEventListener('click', (event) => {
-      const { id } = btn.parentNode;
-      projects.removeProject(id);
-      const projectsNode = document.querySelector('#projects');
-      while (projectsNode.firstChild) {
-        projectsNode.removeChild(projectsNode.firstChild);
-      }
-      generateProjects(projects.getProjects());
-      event.stopImmediatePropagation();
-    });
-  });
+const removeProjectsFromDOM = () => {
+  const projectsNode = document.querySelector('#projects');
+  while (projectsNode.firstChild) {
+    projectsNode.removeChild(projectsNode.firstChild);
+  }
 };
+
+document.addEventListener('click', (event) => {
+  if (event.target.classList.contains('deleteBtn')) {
+    const { id } = event.target.parentNode;
+    projects.removeProject(id);
+    removeProjectsFromDOM();
+    generateProjects(projects.getProjects());
+  }
+}, false);
 
 newProjBtn.addEventListener('click', () => {
   const title = document.querySelector('#form_title');
@@ -79,6 +75,5 @@ newProjBtn.addEventListener('click', () => {
   const project = new Project(title.value, description.value);
   projects.addProject(project);
   generateProject(project);
-  addDeleteListeners();
+  // addDeleteListeners();
 });
-
