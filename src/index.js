@@ -34,8 +34,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 generateMainSkeleton();
 
-
-const newProjBtn = document.querySelector('#new_project');
+const updateProjects = (project) => {
+  const projectsNode = document.querySelector('#projects');
+  projectsNode.appendChild(project);
+  main.setContent(projectsNode);
+  main.changeContent();
+};
 
 const generateProject = (project) => {
   project.addItem(todoitem);
@@ -43,10 +47,7 @@ const generateProject = (project) => {
   const projectIdx = projects.getProjectIndex(project);
   const projectDOMid = `card-${projectIdx}`;
   const projectDOM = projectGenerator.generateProjectDOM(projectDOMid);
-  const projectsNode = document.querySelector('#projects');
-  projectsNode.appendChild(projectDOM);
-  main.setContent(projectsNode);
-  main.changeContent();
+  updateProjects(projectDOM);
 };
 
 const generateProjects = (projects) => {
@@ -60,20 +61,25 @@ const removeProjectsFromDOM = () => {
   }
 };
 
-document.addEventListener('click', (event) => {
-  if (event.target.classList.contains('deleteBtn')) {
-    const { id } = event.target.parentNode;
-    projects.removeProject(id);
-    removeProjectsFromDOM();
-    generateProjects(projects.getProjects());
-  }
-}, false);
-
-newProjBtn.addEventListener('click', () => {
+const addProject = () => {
   const title = document.querySelector('#form_title');
   const description = document.querySelector('#form_description');
   const project = new Project(title.value, description.value);
   projects.addProject(project);
   generateProject(project);
-  // addDeleteListeners();
-});
+};
+
+const removeProject = (id) => {
+  projects.removeProject(id);
+  removeProjectsFromDOM();
+  generateProjects(projects.getProjects());
+};
+
+document.addEventListener('click', (event) => {
+  if (event.target.classList.contains('deleteBtn')) {
+    const { id } = event.target.parentNode;
+    removeProject(id);
+  } else if (event.target.id === 'new_project') {
+    addProject();
+  }
+}, false);
