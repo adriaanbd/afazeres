@@ -76,10 +76,10 @@ const removeProject = (id) => {
 };
 
 document.addEventListener('click', (event) => {
-  if (event.target.classList.contains('deleteBtn')) {
+  if (event.target.matches('.deleteBtn')) {
     const { id } = event.target.parentNode;
     removeProject(id);
-  } else if (event.target.id === 'new_project') {
+  } else if (event.target.matches('#new_project')) {
     addProject();
   }
 }, false);
