@@ -95,9 +95,12 @@ const addItem = (projectId) => {
 };
 
 const removeItem = (ids) => {
-  const [projectId, todoItem] = ids;
-  console.log(projectId, todoItem);
-}
+  const [projectId, todoItemId] = ids;
+  const project = projects.getProjectByIndex(projectId);
+  project.removeItem(todoItemId);
+  // removeProjectsFromDOM();
+  // generateProjects(projects.getProjects());
+};
 
 let newItemId;
 
