@@ -1,6 +1,5 @@
 import PageBuilder from './PageBuilder';
 import TodoItemComponent from './ToDoItemComponent';
-import TodoItem from '../components/TodoItem';
 
 export default class ProjectComponent {
   constructor(project) {
@@ -30,17 +29,9 @@ export default class ProjectComponent {
     const header = this.pageBuilder.generateHeader(4, this.title);
     const deleteBtn = this.pageBuilder.generateButton('remove_circle', 'deleteBtn', id);
     const addBtn = this.pageBuilder.generateButton('add_circle', 'add_icon');
-    addBtn.className = 'modal-trigger';
+    addBtn.className = 'modal-trigger add_item';
     addBtn.id = `add_${id}`;
     addBtn.href = '#newItem';
-    // addBtn.addEventListener('click', (event) => {
-    //   const title = document.querySelector('#item_title');
-    //   const description = document.querySelector('#item_description');
-    //   const date = document.querySelector('#item_date');
-    //   const todo = new TodoItem(title.value, description.value, date.value);
-    //   this.project.addItem(todo);
-    //   // console.log(this.project);
-    // });
     const collectionHeader = this.pageBuilder.generateLi('', 'collection-header');
     collectionHeader.appendChild(header);
     collectionHeader.append(addBtn, deleteBtn);
