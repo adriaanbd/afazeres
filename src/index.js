@@ -94,6 +94,11 @@ const addItem = (projectId) => {
   ul.appendChild(itemDOM);
 };
 
+const removeItem = (ids) => {
+  const [projectId, todoItem] = ids;
+  console.log(projectId, todoItem);
+}
+
 let newItemId;
 
 document.addEventListener('click', (event) => {
@@ -106,5 +111,7 @@ document.addEventListener('click', (event) => {
     [newItemId] = node.parentNode.id.match(/\d+$/);
   } else if (node.matches('#new_item')) {
     addItem(newItemId);
-  }// else if (node.matches('.'))
+  } else if (node.matches('.bin_icon')) {
+    removeItem(node.parentNode.id.split('_'));
+  }
 }, false);
