@@ -8,6 +8,7 @@ import Footer from './interface/Footer';
 import MainContent from './interface/MainContent';
 import ProjectComponent from './interface/ProjectComponent';
 import PageBuilder from './interface/PageBuilder';
+import TodoItemComponent from './interface/ToDoItemComponent';
 
 const appTitle = 'Afazeres';
 
@@ -15,7 +16,6 @@ const pb = new PageBuilder();
 const projects = new Projects();
 const header = new Header(appTitle);
 const footer = new Footer(appTitle, 2019);
-const todoitem = new TodoItem('go to store', 'someone needsto go to the store to buy groceries', 'date is the is date');
 
 const projectsDiv = pb.generateDiv('projects', 'projects');
 const content = document.querySelector('#content');
@@ -42,7 +42,6 @@ const updateProjects = (project) => {
 };
 
 const generateProject = (project) => {
-  project.addItem(todoitem);
   const projectGenerator = new ProjectComponent(project);
   const projectIdx = projects.getProjectIndex(project);
   const projectDOMid = `card-${projectIdx}`;
@@ -69,17 +68,42 @@ const addProject = () => {
   generateProject(project);
 };
 
-const removeProject = (id) => {
+const removeProject = (element) => {
+  const { id } = element.parentNode;
   projects.removeProject(id);
   removeProjectsFromDOM();
   generateProjects(projects.getProjects());
 };
 
+const generateItem = (item) => {
+  const todoGenerator = new TodoItemComponent(item);
+  const itemDOM = todoGenerator.generateItemDOM();
+  return itemDOM;
+};
+
+const addItem = (element) => {
+  const title = document.querySelector('#item_title');
+  const description = document.querySelector('#item_description');
+  const date = document.querySelector('#item_date');
+  const todo = new TodoItem(title.value, description.value, date.value);
+  const [id] = element.parentNode.id.match(/\d+$/);
+  const project = projects.getProjectByIndex(id);
+  project.addItem(todo);
+  const itemDOM = generateItem(todo);
+  const card = document.querySelector(`#card-${id}`);
+  const ul = card.querySelector('.collection');
+  ul.appendChild(itemDOM);
+};
+
 document.addEventListener('click', (event) => {
   if (event.target.matches('.deleteBtn')) {
-    const { id } = event.target.parentNode;
-    removeProject(id);
+    removeProject(event.target);
   } else if (event.target.matches('#new_project')) {
     addProject();
+  } else if (event.target.matches('.add_icon')) {
+    const addItemBtn = document.querySelector('#new_item');
+    addItemBtn.addEventListener('click', () => {
+      addItem(event.target);
+    });
   }
 }, false);
