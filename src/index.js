@@ -75,9 +75,9 @@ const removeProject = (element) => {
   generateProjects(projects.getProjects());
 };
 
-const generateItem = (item, todoId) => {
+const generateItem = (item, projectId, todoId) => {
   const todoGenerator = new TodoItemComponent(item);
-  const itemDOM = todoGenerator.generateItemDOM(todoId);
+  const itemDOM = todoGenerator.generateItemDOM(projectId, todoId);
   return itemDOM;
 };
 
@@ -89,7 +89,7 @@ const addItem = (projectId) => {
   const project = projects.getProjectByIndex(projectId);
   project.addItem(todo);
   const itemId = project.getItemIndex(todo);
-  const itemDOM = generateItem(todo, itemId);
+  const itemDOM = generateItem(todo, projectId, itemId);
   const ul = document.querySelector(`#card-${projectId} .collection`);
   ul.appendChild(itemDOM);
 };

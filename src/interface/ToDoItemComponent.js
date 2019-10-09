@@ -8,7 +8,7 @@ export default class TodoItemComponent {
 
   generateItemDOM(projectId, id) {
     const liContent = this.pageBuilder.generateDiv('todo');
-    const titleContent = `${this.item.getTitle()} <a id=${projectId.contcat('_').contcat(id)} href='#'><i class="material-icons md-48 bin-icon">delete</i></a>`;
+    const titleContent = `${this.item.getTitle()} <a id=${projectId.concat('_').concat(id)} href='#'><i class="material-icons md-48 bin-icon">delete</i></a>`;
     const title = this.pageBuilder.generateHeader('5', titleContent);
     title.className = 'todo-header';
     const description = this.pageBuilder.generateDiv('description');
