@@ -75,21 +75,22 @@ const removeProject = (element) => {
   generateProjects(projects.getProjects());
 };
 
-const generateItem = (item) => {
+const generateItem = (item, todoId) => {
   const todoGenerator = new TodoItemComponent(item);
-  const itemDOM = todoGenerator.generateItemDOM();
+  const itemDOM = todoGenerator.generateItemDOM(todoId);
   return itemDOM;
 };
 
-const addItem = (id) => {
+const addItem = (projectId) => {
   const title = document.querySelector('#item_title');
   const description = document.querySelector('#item_description');
   const date = document.querySelector('#item_date');
   const todo = new TodoItem(title.value, description.value, date.value);
-  const project = projects.getProjectByIndex(id);
+  const project = projects.getProjectByIndex(projectId);
   project.addItem(todo);
-  const itemDOM = generateItem(todo);
-  const ul = document.querySelector(`#card-${id} .collection`);
+  const itemId = project.getItemIndex(todo);
+  const itemDOM = generateItem(todo, itemId);
+  const ul = document.querySelector(`#card-${projectId} .collection`);
   ul.appendChild(itemDOM);
 };
 
@@ -105,5 +106,5 @@ document.addEventListener('click', (event) => {
     [newItemId] = node.parentNode.id.match(/\d+$/);
   } else if (node.matches('#new_item')) {
     addItem(newItemId);
-  }
+  }// else if (node.matches('.'))
 }, false);

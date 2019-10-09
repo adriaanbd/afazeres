@@ -6,9 +6,9 @@ export default class TodoItemComponent {
     this.pageBuilder = new PageBuilder();
   }
 
-  generateItemDOM() {
+  generateItemDOM(projectId, id) {
     const liContent = this.pageBuilder.generateDiv('todo');
-    const titleContent = `${this.item.getTitle()} <a href='#'><i class="material-icons md-48">delete</i></a>`;
+    const titleContent = `${this.item.getTitle()} <a id=${projectId.contcat('_').contcat(id)} href='#'><i class="material-icons md-48 bin-icon">delete</i></a>`;
     const title = this.pageBuilder.generateHeader('5', titleContent);
     title.className = 'todo-header';
     const description = this.pageBuilder.generateDiv('description');
@@ -17,7 +17,6 @@ export default class TodoItemComponent {
     date.innerHTML = `Date: ${this.item.getDueDate()}`;
     liContent.append(title, description, date);
     const li = this.pageBuilder.generateLi(liContent, 'collection-item');
-
     return li;
   }
 }

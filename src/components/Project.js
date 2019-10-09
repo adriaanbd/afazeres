@@ -32,4 +32,12 @@ export default class Project {
   getList() {
     return this.toDoList;
   }
+
+  getItemByIndex(index) {
+    return this.toDoList[index];
+  }
+
+  getItemIndex(item) {
+    return this.toDoList.indexOf(item);
+  }
 }
