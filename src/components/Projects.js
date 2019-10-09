@@ -11,6 +11,10 @@ export default class Projects {
     return this.projectList;
   }
 
+  getProjectByIndex(index) {
+    return this.projectList[index];
+  }
+
   getProjectIndex(project) {
     return this.projectList.indexOf(project);
   }
