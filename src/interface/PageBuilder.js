@@ -26,7 +26,7 @@ export default class PageBuilder {
     this.createLi = (content, liClass, id) => {
       const li = document.createElement('li');
 
-      if (content) li.innerHTML = content;
+      if (content) li.appendChild(content); //innerHTML = content;
       if (liClass) li.className = liClass;
       if (id) li.id = id;
 
