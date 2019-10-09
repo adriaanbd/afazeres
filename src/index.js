@@ -93,16 +93,17 @@ const addItem = (id) => {
   ul.appendChild(itemDOM);
 };
 
+let newItemId;
+
 document.addEventListener('click', (event) => {
-  if (event.target.matches('.deleteBtn')) {
-    removeProject(event.target);
-  } else if (event.target.matches('#new_project')) {
+  const node = event.target;
+  if (node.matches('.deleteBtn')) {
+    removeProject(node);
+  } else if (node.matches('#new_project')) {
     addProject();
-  } else if (event.target.matches('.add_icon')) {
-    const addItemBtn = document.querySelector('#new_item');
-    const [id] = event.target.parentNode.id.match(/\d+$/);
-    addItemBtn.addEventListener('click', () => {
-      addItem(id);
-    });
+  } else if (node.matches('.add_icon')) {
+    [newItemId] = node.parentNode.id.match(/\d+$/);
+  } else if (node.matches('#new_item')) {
+    addItem(newItemId);
   }
 }, false);
