@@ -81,17 +81,15 @@ const generateItem = (item) => {
   return itemDOM;
 };
 
-const addItem = (element) => {
+const addItem = (id) => {
   const title = document.querySelector('#item_title');
   const description = document.querySelector('#item_description');
   const date = document.querySelector('#item_date');
   const todo = new TodoItem(title.value, description.value, date.value);
-  const [id] = element.parentNode.id.match(/\d+$/);
   const project = projects.getProjectByIndex(id);
   project.addItem(todo);
   const itemDOM = generateItem(todo);
-  const card = document.querySelector(`#card-${id}`);
-  const ul = card.querySelector('.collection');
+  const ul = document.querySelector(`#card-${id} .collection`);
   ul.appendChild(itemDOM);
 };
 
@@ -102,8 +100,9 @@ document.addEventListener('click', (event) => {
     addProject();
   } else if (event.target.matches('.add_icon')) {
     const addItemBtn = document.querySelector('#new_item');
+    const [id] = event.target.parentNode.id.match(/\d+$/);
     addItemBtn.addEventListener('click', () => {
-      addItem(event.target);
+      addItem(id);
     });
   }
 }, false);
