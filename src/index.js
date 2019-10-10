@@ -81,11 +81,16 @@ const generateItem = (item, projectId, todoId) => {
   return itemDOM;
 };
 
-const addItem = (projectId) => {
+const getItemFormValues = () => {
   const title = document.querySelector('#item_title');
   const description = document.querySelector('#item_description');
   const date = document.querySelector('#item_date');
-  const todo = new TodoItem(title.value, description.value, date.value);
+  return [title, description, date].map((element) => element.value);
+};
+
+const addItem = (projectId) => {
+  const itemFormValues = getItemFormValues();
+  const todo = new TodoItem(...itemFormValues);
   const project = projects.getProjectByIndex(projectId);
   project.addItem(todo);
   const itemId = project.getItemIndex(todo);
@@ -94,15 +99,32 @@ const addItem = (projectId) => {
   ul.appendChild(itemDOM);
 };
 
+const removeItemDOM = (projectId) => {
+  const queryStr = `#card-${projectId} .collection-item`;
+  const items = document.querySelectorAll(queryStr);
+  for (let i = 0; i < items.length; i += 1) { items[i].remove(); }
+};
+
+const generateProjectItemDOM = (projectId) => {
+  const project = projects.getProjectByIndex(projectId);
+  const items = project.getList();
+  const ul = document.querySelector(`#card-${projectId} .collection`);
+  items.forEach((item) => {
+    const itemId = project.getItemIndex(item);
+    const itemDOM = generateItem(item, projectId, itemId);
+    ul.appendChild(itemDOM);
+  });
+};
+
 const removeItem = (ids) => {
   const [projectId, todoItemId] = ids;
   const project = projects.getProjectByIndex(projectId);
   project.removeItem(todoItemId);
-  // removeProjectsFromDOM();
-  // generateProjects(projects.getProjects());
+  removeItemDOM(projectId);
+  generateProjectItemDOM(projectId);
 };
 
-let newItemId;
+let projectID;
 
 document.addEventListener('click', (event) => {
   const node = event.target;
@@ -111,9 +133,9 @@ document.addEventListener('click', (event) => {
   } else if (node.matches('#new_project')) {
     addProject();
   } else if (node.matches('.add_icon')) {
-    [newItemId] = node.parentNode.id.match(/\d+$/);
+    [projectID] = node.parentNode.id.match(/\d+$/);
   } else if (node.matches('#new_item')) {
-    addItem(newItemId);
+    addItem(projectID);
   } else if (node.matches('.bin_icon')) {
     removeItem(node.parentNode.id.split('_'));
   }
