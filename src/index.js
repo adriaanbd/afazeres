@@ -137,12 +137,22 @@ const setFormValues = (todo) => {
   date.value = todo.getDueDate();
 };
 
-const handleEdit = (todo) => {
+const updateItemValues = (title, description, date, projectId, itemId) => {
+  const titles = document.querySelectorAll(`#card-${projectId} .todo h5`);
+  const descriptions = document.querySelectorAll(`#card-${projectId} .todo .description`);
+  const dates = document.querySelectorAll(`#card-${projectId} .todo .due-date`);
+  titles[itemId].innerText = title;
+  descriptions[itemId].innerText = description;
+  dates[itemId].innerText = date;
+};
+
+const handleEdit = (todo, projectId, todoItemId) => {
   const itemFormValues = getItemFormValues(true);
-  todo.setTitle(itemFormValues[0]);
-  todo.setDescription(itemFormValues[1]);
-  todo.setDueDate(itemFormValues[2]);
-  console.log(todo);
+  const [title, description, date] = itemFormValues;
+  todo.setTitle(title);
+  todo.setDescription(description);
+  todo.setDueDate(date);
+  updateItemValues(title, description, date, projectId, todoItemId);
 };
 
 const editItem = (ids) => {
@@ -152,7 +162,7 @@ const editItem = (ids) => {
   setFormValues(todo);
   const editItemBtn = document.querySelector('#edit_item');
   editItemBtn.addEventListener('click', () => {
-    handleEdit(todo);
+    handleEdit(todo, projectId, todoItemId);
   });
 };
 
