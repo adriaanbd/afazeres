@@ -26,18 +26,26 @@ export default class ProjectComponent {
   }
 
   generateProjectDOM(id) {
+    const liHeaderArgs = ['', 'collection-header'];
+    const deleteBtnArgs = ['remove_circle', 'deleteBtn', id];
+    const addBtnArgs = ['add_circle', 'add_icon'];
+    const [projectIdx] = id.match(/\d+$/);
+
     const header = this.pageBuilder.generateHeader(4, this.title);
-    const deleteBtn = this.pageBuilder.generateButton('remove_circle', 'deleteBtn', id);
-    const addBtn = this.pageBuilder.generateButton('add_circle', 'add_icon');
-    addBtn.className = 'modal-trigger add_item';
-    addBtn.id = `add_${id}`;
+    const collectionHeader = this.pageBuilder.generateLi(...liHeaderArgs);
+    const deleteBtn = this.pageBuilder.generateButton(...deleteBtnArgs);
+    const addBtn = this.pageBuilder.generateButton(...addBtnArgs);
+    const card = this.pageBuilder.generateCard(this.cardContent, id);
+
+    addBtn.id = `add_${projectIdx}`;
+    addBtn.classList.add('modal-trigger', 'add_item');
     addBtn.href = '#newItem';
-    const collectionHeader = this.pageBuilder.generateLi('', 'collection-header');
+
     collectionHeader.appendChild(header);
     collectionHeader.append(addBtn, deleteBtn);
+
     this.cardContent.appendChild(collectionHeader);
-    this.generateList();
-    const card = this.pageBuilder.generateCard(this.cardContent, id);
+
     return card;
   }
 }

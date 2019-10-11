@@ -41,12 +41,31 @@ const updateProjects = (project) => {
   main.changeContent();
 };
 
+const generateItem = (item, projectId, todoId) => {
+  const todoGenerator = new TodoItemComponent(item);
+  const itemDOM = todoGenerator.generateItemDOM(projectId, todoId);
+  return itemDOM;
+};
+
+const generateProjectItemDOM = (projectId) => {
+  const project = projects.getProjectByIndex(projectId);
+  const items = project.getList();
+  const ul = document.querySelector(`#card-${projectId} .collection`);
+  items.forEach((item) => {
+    const itemId = project.getItemIndex(item);
+    const itemArgs = [item, projectId, itemId];
+    const itemDOM = generateItem(...itemArgs);
+    ul.appendChild(itemDOM);
+  });
+};
+
 const generateProject = (project) => {
   const projectGenerator = new ProjectComponent(project);
   const projectIdx = projects.getProjectIndex(project);
   const projectDOMid = `card-${projectIdx}`;
   const projectDOM = projectGenerator.generateProjectDOM(projectDOMid);
   updateProjects(projectDOM);
+  generateProjectItemDOM(projectIdx);
 };
 
 const generateProjects = (projects) => {
@@ -75,11 +94,6 @@ const removeProject = (element) => {
   generateProjects(projects.getProjects());
 };
 
-const generateItem = (item, projectId, todoId) => {
-  const todoGenerator = new TodoItemComponent(item);
-  const itemDOM = todoGenerator.generateItemDOM(projectId, todoId);
-  return itemDOM;
-};
 
 const getItemFormValues = () => {
   const title = document.querySelector('#item_title');
@@ -105,16 +119,6 @@ const removeItemDOM = (projectId) => {
   for (let i = 0; i < items.length; i += 1) { items[i].remove(); }
 };
 
-const generateProjectItemDOM = (projectId) => {
-  const project = projects.getProjectByIndex(projectId);
-  const items = project.getList();
-  const ul = document.querySelector(`#card-${projectId} .collection`);
-  items.forEach((item) => {
-    const itemId = project.getItemIndex(item);
-    const itemDOM = generateItem(item, projectId, itemId);
-    ul.appendChild(itemDOM);
-  });
-};
 
 const removeItem = (ids) => {
   const [projectId, todoItemId] = ids;
