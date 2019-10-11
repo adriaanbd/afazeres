@@ -142,5 +142,10 @@ document.addEventListener('click', (event) => {
     addItem(projectID);
   } else if (node.matches('.bin_icon')) {
     removeItem(node.parentNode.id.split('_'));
+  } else if (node.matches('.edit_icon')) {
+    // node.parentNode.id.split('_').slice(-2);
+    console.log('clicked');
+    console.log(node.parentNode.id.split('_').slice(-2));
+    // editItem();
   }
 }, false);
