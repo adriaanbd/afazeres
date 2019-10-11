@@ -13,7 +13,7 @@ export default class TodoItemComponent {
     title.className = 'todo-header';
     const description = this.pageBuilder.generateDiv('description');
     description.innerHTML = `Description: ${this.item.getDescription()}`;
-    const date = this.pageBuilder.generateDiv('title');
+    const date = this.pageBuilder.generateDiv('due-date');
     date.innerHTML = `Date: ${this.item.getDueDate()}`;
     liContent.append(title, description, date);
     const li = this.pageBuilder.generateLi(liContent, 'collection-item');

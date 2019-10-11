@@ -95,10 +95,10 @@ const removeProject = (element) => {
 };
 
 
-const getItemFormValues = () => {
-  const title = document.querySelector('#item_title');
-  const description = document.querySelector('#item_description');
-  const date = document.querySelector('#item_date');
+const getItemFormValues = (edit = false) => {
+  const title = edit === false ? document.querySelector('#item_title') : document.querySelector('#edit_item_title');
+  const description = edit === false ? document.querySelector('#item_description') : document.querySelector('#edit_item_description');
+  const date = edit === false ? document.querySelector('#item_date') : document.querySelector('#edit_item_date');
   return [title, description, date].map((element) => element.value);
 };
 
@@ -132,11 +132,28 @@ const setFormValues = (todo) => {
   const title = document.querySelector('#edit_item_title');
   const description = document.querySelector('#edit_item_description');
   const date = document.querySelector('#edit_item_date');
-}
+  title.value = todo.getTitle();
+  description.value = todo.getDescription();
+  date.value = todo.getDueDate();
+};
+
+const handleEdit = (todo) => {
+  const itemFormValues = getItemFormValues(true);
+  todo.setTitle(itemFormValues[0]);
+  todo.setDescription(itemFormValues[1]);
+  todo.setDueDate(itemFormValues[2]);
+  console.log(todo);
+};
 
 const editItem = (ids) => {
-  // const updatedInfo = getItemFormValues();
-  console.log(ids);
+  const [projectId, todoItemId] = ids;
+  const project = projects.getProjectByIndex(projectId);
+  const todo = project.getItemByIndex(todoItemId);
+  setFormValues(todo);
+  const editItemBtn = document.querySelector('#edit_item');
+  editItemBtn.addEventListener('click', () => {
+    handleEdit(todo);
+  });
 };
 
 let projectID;
