@@ -44,10 +44,31 @@ export default class MainContent {
       <a href="#!" class="modal-close waves-effect waves-green btn-flat" id="new_item">Add New Item</a>
     </div>`;
     newItem.appendChild(toDoForm);
+    const editItem = this.pageBuilder.generateDiv('modal', 'editItem');
+    const toDoEditForm = document.createElement('form');
+    toDoEditForm.className = 'modal-content';
+    toDoEditForm.innerHTML = `
+    <div class="row">
+      <div class="input-field col s12">
+        <input  id="edit_item_title" type="text" class="validate">
+        <label for="item_title">Title</label>
+      </div>
+      <div class="input-field col s12">
+        <input id="edit_item_description" type="text" class="validate">
+        <label for="edit_item_description">Description</label>
+      </div>
+      <div class="input-field col s12">
+        <input  id="edit_item_date" type="date" class="validate"><label for="item_date">Title</label>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat" id="edit_item">Edit Item</a>
+    </div>`;
+    editItem.appendChild(toDoEditForm);
 
 
     newProject.appendChild(form);
-    this.main.append(button, newProject, newItem);
+    this.main.append(button, newProject, newItem, editItem);
     if (div) this.main.removeChild(div);
     this.contentWrapper.appendChild(this.content);
     this.main.append(this.contentWrapper);

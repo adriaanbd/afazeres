@@ -128,6 +128,17 @@ const removeItem = (ids) => {
   generateProjectItemDOM(projectId);
 };
 
+const setFormValues = (todo) => {
+  const title = document.querySelector('#edit_item_title');
+  const description = document.querySelector('#edit_item_description');
+  const date = document.querySelector('#edit_item_date');
+}
+
+const editItem = (ids) => {
+  // const updatedInfo = getItemFormValues();
+  console.log(ids);
+};
+
 let projectID;
 
 document.addEventListener('click', (event) => {
@@ -143,9 +154,6 @@ document.addEventListener('click', (event) => {
   } else if (node.matches('.bin_icon')) {
     removeItem(node.parentNode.id.split('_'));
   } else if (node.matches('.edit_icon')) {
-    // node.parentNode.id.split('_').slice(-2);
-    console.log('clicked');
-    console.log(node.parentNode.id.split('_').slice(-2));
-    // editItem();
+    editItem(node.parentNode.id.split('_').slice(-2));
   }
 }, false);
