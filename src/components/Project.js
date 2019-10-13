@@ -24,8 +24,20 @@ export default class Project {
   addItem(item) {
     this.toDoList.push(item);
   }
-  
+
   removeItem(pos) {
-    this.toDoList(pos, 1);
+    this.toDoList.splice(pos, 1);
+  }
+
+  getList() {
+    return this.toDoList;
+  }
+
+  getItemByIndex(index) {
+    return this.toDoList[index];
+  }
+
+  getItemIndex(item) {
+    return this.toDoList.indexOf(item);
   }
 }
