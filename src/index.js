@@ -103,14 +103,17 @@ const getItemFormValues = (edit = false) => {
 };
 
 const addItem = (projectId) => {
-  const itemFormValues = getItemFormValues();
-  const todo = new TodoItem(...itemFormValues);
-  const project = projects.getProjectByIndex(projectId);
-  project.addItem(todo);
-  const itemId = project.getItemIndex(todo);
-  const itemDOM = generateItem(todo, projectId, itemId);
-  const ul = document.querySelector(`#card-${projectId} .collection`);
-  ul.appendChild(itemDOM);
+  const add = document.querySelector('#new_item');
+  add.addEventListener('click', () => {
+    const itemFormValues = getItemFormValues();
+    const todo = new TodoItem(...itemFormValues);
+    const project = projects.getProjectByIndex(projectId);
+    project.addItem(todo);
+    const itemId = project.getItemIndex(todo);
+    const itemDOM = generateItem(todo, projectId, itemId);
+    const ul = document.querySelector(`#card-${projectId} .collection`);
+    ul.appendChild(itemDOM);
+  }, { once: true });
 };
 
 const removeItemDOM = (projectId) => {
@@ -156,8 +159,8 @@ const updateItemValues = (title, description, date, projectId, itemId) => {
   const dateNode = dates[itemId];
 
   titleNode.innerText = title;
-  descriptionNode.innerText = description;
-  dateNode.innerText = date;
+  descriptionNode.innerText = `Description: ${description}`;
+  dateNode.innerText = `Date: ${date}`;
 };
 
 const handleEdit = (todo, projectId, todoItemId) => {
@@ -180,8 +183,6 @@ const editItem = (ids) => {
   }, { once: true });
 };
 
-let projectID;
-
 document.addEventListener('click', (event) => {
   const node = event.target;
   if (node.matches('.deleteBtn')) {
@@ -189,9 +190,8 @@ document.addEventListener('click', (event) => {
   } else if (node.matches('#new_project')) {
     addProject();
   } else if (node.matches('.add_icon')) {
-    [projectID] = node.parentNode.id.match(/\d+$/);
-  } else if (node.matches('#new_item')) {
-    addItem(projectID);
+    const [projectId] = node.parentNode.id.match(/\d+$/);
+    addItem(projectId);
   } else if (node.matches('.bin_icon')) {
     removeItem(node.parentNode.id.split('_'));
   } else if (node.matches('.edit_icon')) {
