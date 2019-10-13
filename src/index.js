@@ -129,21 +129,35 @@ const removeItem = (ids) => {
 };
 
 const setFormValues = (todo) => {
+  const todoTitle = todo.getTitle();
+  const todoDescription = todo.getDescription();
+  const todoDate = todo.getDueDate();
+
   const title = document.querySelector('#edit_item_title');
   const description = document.querySelector('#edit_item_description');
   const date = document.querySelector('#edit_item_date');
-  title.value = todo.getTitle();
-  description.value = todo.getDescription();
-  date.value = todo.getDueDate();
+
+  title.value = todoTitle;
+  description.value = todoDescription;
+  date.value = todoDate;
 };
 
 const updateItemValues = (title, description, date, projectId, itemId) => {
-  const titles = document.querySelectorAll(`#card-${projectId} .todo h5`);
-  const descriptions = document.querySelectorAll(`#card-${projectId} .todo .description`);
-  const dates = document.querySelectorAll(`#card-${projectId} .todo .due-date`);
-  titles[itemId].innerText = title;
-  descriptions[itemId].innerText = description;
-  dates[itemId].innerText = date;
+  const allTitlesQuery = `#card-${projectId} h5`;
+  const allDescriptionsQuery = `#card-${projectId} .description`;
+  const allDatesQuery = `#card-${projectId} .due-date`;
+
+  const titles = document.querySelectorAll(allTitlesQuery);
+  const descriptions = document.querySelectorAll(allDescriptionsQuery);
+  const dates = document.querySelectorAll(allDatesQuery);
+
+  const titleNode = titles[itemId];
+  const descriptionNode = descriptions[itemId];
+  const dateNode = dates[itemId];
+
+  titleNode.innerText = title;
+  descriptionNode.innerText = description;
+  dateNode.innerText = date;
 };
 
 const handleEdit = (todo, projectId, todoItemId) => {
@@ -163,7 +177,7 @@ const editItem = (ids) => {
   const editItemBtn = document.querySelector('#edit_item');
   editItemBtn.addEventListener('click', () => {
     handleEdit(todo, projectId, todoItemId);
-  });
+  }, { once: true });
 };
 
 let projectID;
@@ -181,6 +195,7 @@ document.addEventListener('click', (event) => {
   } else if (node.matches('.bin_icon')) {
     removeItem(node.parentNode.id.split('_'));
   } else if (node.matches('.edit_icon')) {
-    editItem(node.parentNode.id.split('_').slice(-2));
+    const ids = node.parentNode.id.split('_').slice(-2);
+    editItem(ids);
   }
 }, false);
