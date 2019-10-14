@@ -29,6 +29,8 @@ const generateMainSkeleton = () => {
 
 document.addEventListener('DOMContentLoaded', () => {
   const elems = document.querySelectorAll('.modal');
+  const selectElems = document.querySelectorAll('select');
+  M.FormSelect.init(selectElems);
   M.Modal.init(elems);
 });
 
@@ -99,7 +101,8 @@ const getItemFormValues = (edit = false) => {
   const title = edit === false ? document.querySelector('#item_title') : document.querySelector('#edit_item_title');
   const description = edit === false ? document.querySelector('#item_description') : document.querySelector('#edit_item_description');
   const date = edit === false ? document.querySelector('#item_date') : document.querySelector('#edit_item_date');
-  return [title, description, date].map((element) => element.value);
+  const priority = edit === false ? document.querySelector('#item_priority') : document.querySelector('#edit_item_priority');
+  return [title, description, date, priority].map((element) => element.value);
 };
 
 const addItem = (projectId) => {
@@ -135,41 +138,53 @@ const setFormValues = (todo) => {
   const todoTitle = todo.getTitle();
   const todoDescription = todo.getDescription();
   const todoDate = todo.getDueDate();
+  const todoPriority = todo.getPriority();
 
   const title = document.querySelector('#edit_item_title');
   const description = document.querySelector('#edit_item_description');
   const date = document.querySelector('#edit_item_date');
+  const priority = document.querySelector('#edit_item_priority');
 
   title.value = todoTitle;
   description.value = todoDescription;
   date.value = todoDate;
+  priority.valye = todoPriority;
 };
 
-const updateItemValues = (title, description, date, projectId, itemId) => {
+const updateItemValues = (
+  title, description, date, priority, projectId, itemId,
+) => {
   const allTitlesQuery = `#card-${projectId} h5`;
   const allDescriptionsQuery = `#card-${projectId} .description`;
   const allDatesQuery = `#card-${projectId} .due-date`;
+  const allPrioritiesQuery = `#card-${projectId} .priority`;
 
   const titles = document.querySelectorAll(allTitlesQuery);
   const descriptions = document.querySelectorAll(allDescriptionsQuery);
   const dates = document.querySelectorAll(allDatesQuery);
+  const priorities = document.querySelectorAll(allPrioritiesQuery);
 
   const titleNode = titles[itemId];
   const descriptionNode = descriptions[itemId];
   const dateNode = dates[itemId];
+  const priorityNode = priorities[itemId];
 
   titleNode.innerText = title;
   descriptionNode.innerText = `Description: ${description}`;
   dateNode.innerText = `Date: ${date}`;
+  priorityNode.innerText = `Priority: ${priority}`;
 };
 
 const handleEdit = (todo, projectId, todoItemId) => {
   const itemFormValues = getItemFormValues(true);
-  const [title, description, date] = itemFormValues;
+  const [title, description, date, priority] = itemFormValues;
+
   todo.setTitle(title);
   todo.setDescription(description);
   todo.setDueDate(date);
-  updateItemValues(title, description, date, projectId, todoItemId);
+  todo.setPriority(priority);
+
+  updateItemValues(title, description, date, priority, projectId, todoItemId);
 };
 
 const editItem = (ids) => {

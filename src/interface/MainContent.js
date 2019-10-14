@@ -37,7 +37,18 @@ export default class MainContent {
         <label for="item_description">Description</label>
       </div>
       <div class="input-field col s12">
-        <input  id="item_date" type="date" class="validate"><label for="item_date">Title</label>
+        <input  id="item_date" type="date" class="validate">
+        <label for="item_date">Due date</label>
+      </div>
+      <div class="input-field col s12">
+        <select id="item_priority">
+          <option value="" disabled selected>Choose priority</option>
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
+          <option value="none">None</option>
+        </select>
+        <label for="item_priority">Priority</label>
       </div>
     </div>
     <div class="modal-footer">
@@ -51,14 +62,24 @@ export default class MainContent {
     <div class="row">
       <div class="input-field col s12">
         <input  id="edit_item_title" type="text" class="validate">
-        <label for="item_title">Title</label>
+        <label for="edit_item_title">Title</label>
       </div>
       <div class="input-field col s12">
         <input id="edit_item_description" type="text" class="validate">
         <label for="edit_item_description">Description</label>
       </div>
       <div class="input-field col s12">
-        <input  id="edit_item_date" type="date" class="validate"><label for="item_date">Title</label>
+        <input  id="edit_item_date" type="date" class="validate"><label for="edit_item_date">Title</label>
+      </div>
+      <div class="input-field col s12">
+        <select id="edit_item_priority">
+          <option value="" disabled selected>Choose priority</option>
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
+          <option value="none">None</option>
+        </select>
+        <label for="edit_item_priority">Priority</label>
       </div>
     </div>
     <div class="modal-footer">
