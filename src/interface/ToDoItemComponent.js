@@ -10,7 +10,6 @@ export default class TodoItemComponent {
     const itemWrap = this.pageBuilder.generateDiv('itemWrap');
     const liContent = this.pageBuilder.generateDiv('todo');
     const titleContent = `${this.item.getTitle()}`;
-    // const titleContent = `${this.item.getTitle()} <a id=edit_${projectId}_${id} href="#editItem" class="modal-trigger"><i class="small edit_icon material-icons">edit</i></a><a id=${projectId}_${id} href="#"><i class="material-icons small bin_icon">delete</i></a>`;
     const buttonsWrap = this.pageBuilder.generateDiv('buttonsWrap');
     buttonsWrap.innerHTML = `<a id=edit_${projectId}_${id} href="#editItem" class="modal-trigger"><i class="small edit_icon material-icons">edit</i></a><a id=${projectId}_${id} href="#"><i class="material-icons small bin_icon">delete</i></a>`;
     const title = this.pageBuilder.generateHeader('5', titleContent);
