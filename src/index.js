@@ -101,7 +101,8 @@ const getItemFormValues = (edit = false) => {
   const title = edit === false ? document.querySelector('#item_title') : document.querySelector('#edit_item_title');
   const description = edit === false ? document.querySelector('#item_description') : document.querySelector('#edit_item_description');
   const date = edit === false ? document.querySelector('#item_date') : document.querySelector('#edit_item_date');
-  return [title, description, date].map((element) => element.value);
+  const priority = document.querySelector('#item_priority');
+  return [title, description, date, priority].map((element) => element.value);
 };
 
 const addItem = (projectId) => {
