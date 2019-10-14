@@ -43,10 +43,10 @@ export default class MainContent {
       <div class="input-field col s12">
         <select id="item_priority">
           <option value="" disabled selected>Choose priority</option>
-          <option value="Low">Low</option>
-          <option value="Medium">Medium</option>
-          <option value="High">High</option>
-          <option value="High">None</option>
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
+          <option value="none">None</option>
         </select>
         <label for="item_priority">Priority</label>
       </div>
