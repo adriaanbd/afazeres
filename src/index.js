@@ -29,6 +29,8 @@ const generateMainSkeleton = () => {
 
 document.addEventListener('DOMContentLoaded', () => {
   const elems = document.querySelectorAll('.modal');
+  const selectElems = document.querySelectorAll('select');
+  M.FormSelect.init(selectElems);
   M.Modal.init(elems);
 });
 

@@ -37,7 +37,18 @@ export default class MainContent {
         <label for="item_description">Description</label>
       </div>
       <div class="input-field col s12">
-        <input  id="item_date" type="date" class="validate"><label for="item_date">Title</label>
+        <input  id="item_date" type="date" class="validate">
+        <label for="item_date">Due date</label>
+      </div>
+      <div class="input-field col s12">
+        <select id="item_priority">
+          <option value="" disabled selected>Choose priority</option>
+          <option value="Low">Low</option>
+          <option value="Medium">Medium</option>
+          <option value="High">High</option>
+          <option value="High">None</option>
+        </select>
+        <label for="item_priority">Priority</label>
       </div>
     </div>
     <div class="modal-footer">
