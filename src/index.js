@@ -9,6 +9,7 @@ import MainContent from './interface/MainContent';
 import ProjectComponent from './interface/ProjectComponent';
 import PageBuilder from './interface/PageBuilder';
 import TodoItemComponent from './interface/ToDoItemComponent';
+import { userInfo } from 'os';
 
 const appTitle = 'Afazeres';
 
@@ -225,5 +226,14 @@ document.addEventListener('click', (event) => {
 
 
 document.addEventListener('DOMContentLoaded', () => {
-  addProject([defaultProject.title, defaultProject.description]);
+  const projects = JSON.parse(localStorage.getItem('projects'));
+  if (projects.length > 0) {
+    generateProjects(projects);
+  } else if (projects.length === 0) {
+    addProject([defaultProject.title, defaultProject.description]);
+  }
 }, { once: true });
+
+window.addEventListener('beforeunload', () => {
+  localStorage.setItem('projects', JSON.stringify(projects.getProjects()));
+});
