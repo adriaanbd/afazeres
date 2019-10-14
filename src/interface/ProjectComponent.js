@@ -31,7 +31,12 @@ export default class ProjectComponent {
     const addBtnArgs = ['add_circle', 'add_icon'];
     const [projectIdx] = id.match(/\d+$/);
 
+    const detailsWrap = this.pageBuilder.generateDiv('project_details');
+    const buttonsWrap = this.pageBuilder.generateDiv('project_buttons');
+
     const header = this.pageBuilder.generateHeader(4, this.title);
+    const description = this.pageBuilder.generateP(this.project.getDescription(), 'project_description');
+
     const collectionHeader = this.pageBuilder.generateLi(...liHeaderArgs);
     const deleteBtn = this.pageBuilder.generateButton(...deleteBtnArgs);
     const addBtn = this.pageBuilder.generateButton(...addBtnArgs);
@@ -41,8 +46,10 @@ export default class ProjectComponent {
     addBtn.classList.add('modal-trigger', 'add_item');
     addBtn.href = '#newItem';
 
-    collectionHeader.appendChild(header);
-    collectionHeader.append(addBtn, deleteBtn);
+    detailsWrap.append(header, description);
+    buttonsWrap.append(addBtn, deleteBtn);
+
+    collectionHeader.append(detailsWrap, buttonsWrap);
 
     this.cardContent.appendChild(collectionHeader);
 
