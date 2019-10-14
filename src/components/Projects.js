@@ -9,13 +9,10 @@ export default class Projects {
       projs.forEach((proj) => {
         const items = [];
         proj.toDoList.forEach((item) => {
-          console.log(item);
           items.push(new TodoItem(item.title, item.description, item.dueDate, item.priority, item.status));
         });
-        console.log(items);
-        projects.push(new Project(proj.title, proj.description));
+        projects.push(new Project(proj.title, proj.description, items));
       });
-      console.log(projects);
       return projects;
     };
   }

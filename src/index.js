@@ -221,30 +221,13 @@ document.addEventListener('click', (event) => {
   }
 }, false);
 
-
-// document.addEventListener('DOMContentLoaded', () => {
-//   const projects = JSON.parse(localStorage.getItem('projects'));
-//   if (projects.length > 0) {
-//     generateProjects(projects);
-//   } else if (projects.length === 0) {
-//     addProject([defaultProject.title, defaultProject.description]);
-//   }
-// }, { once: true });
-
 const hasLocalStorageContent = () => localStorage.getItem('projects') !== null;
-
-// const addProjects = (projs) => {
-//   projects.setProjectsFromLocalStorage(projs);
-// };
 
 const init = () => {
   if (hasLocalStorageContent()) {
     const initProjects = JSON.parse(localStorage.getItem('projects'));
-    
-    console.log(initProjects);
     projects.setProjectsFromLocalStorage(initProjects);
     generateProjects(projects.getProjects());
-    // console.log('projects: ', projects);
   } else {
     localStorage.setItem('projects', JSON.stringify(projects.getProjects()));
   }
