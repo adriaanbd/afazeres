@@ -9,7 +9,6 @@ import MainContent from './interface/MainContent';
 import ProjectComponent from './interface/ProjectComponent';
 import PageBuilder from './interface/PageBuilder';
 import TodoItemComponent from './interface/ToDoItemComponent';
-import { userInfo } from 'os';
 
 const appTitle = 'Afazeres';
 
@@ -26,6 +25,8 @@ const defaultProject = {
   title: 'General',
   description: 'Default project for all todo items',
 };
+
+const generalProject = new Project('General', 'Default project for all todo items');
 
 const generateMainSkeleton = () => {
   content.appendChild(header.createNav());
@@ -237,3 +238,20 @@ document.addEventListener('DOMContentLoaded', () => {
 window.addEventListener('beforeunload', () => {
   localStorage.setItem('projects', JSON.stringify(projects.getProjects()));
 });
+
+const hasLocalStorageContent = () => localStorage.getItem('projects') !== null;
+
+const addProjects = (projects) => {
+  console.log(projects);
+};
+
+const init = () => {
+  if (hasLocalStorageContent()) {
+    const initprojects = JSON.parse(localStorage.getItem('projects'));
+    addProjects(initprojects);
+  } else {
+    projects.addProject(generalProject);
+  }
+};
+
+init();

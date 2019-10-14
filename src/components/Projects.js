@@ -11,6 +11,10 @@ export default class Projects {
     return this.projectList;
   }
 
+  setProjects(projects) {
+    this.projectList = projects;
+  }
+
   getProjectByIndex(index) {
     return this.projectList[index];
   }
