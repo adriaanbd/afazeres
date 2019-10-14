@@ -21,6 +21,11 @@ const projectsDiv = pb.generateDiv('projects', 'projects');
 const content = document.querySelector('#content');
 const main = new MainContent(projectsDiv);
 
+const defaultProject = {
+  title: 'General',
+  description: 'Default project for all todo items',
+};
+
 const generateMainSkeleton = () => {
   content.appendChild(header.createNav());
   content.appendChild(main.generateContent());
@@ -81,10 +86,13 @@ const removeProjectsFromDOM = () => {
   }
 };
 
-const addProject = () => {
+const addProject = (values = false) => {
   const title = document.querySelector('#form_title');
   const description = document.querySelector('#form_description');
-  const project = new Project(title.value, description.value);
+  const projectValues = values === false ? [title, description].map(
+    (element) => element.value,
+  ) : values;
+  const project = new Project(...projectValues);
   projects.addProject(project);
   generateProject(project);
 };
@@ -214,3 +222,8 @@ document.addEventListener('click', (event) => {
     editItem(ids);
   }
 }, false);
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  addProject([defaultProject.title, defaultProject.description]);
+}, { once: true });
