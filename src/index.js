@@ -228,9 +228,9 @@ const init = () => {
     const initProjects = JSON.parse(localStorage.getItem('projects'));
     projects.setProjectsFromLocalStorage(initProjects);
     generateProjects(projects.getProjects());
-  } else {
-    localStorage.setItem('projects', JSON.stringify(projects.getProjects()));
-  }
+  } // else {
+  //   localStorage.setItem('projects', JSON.stringify(projects.getProjects()));
+  // }
 };
 
 window.addEventListener('beforeunload', () => {
