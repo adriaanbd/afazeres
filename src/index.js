@@ -13,7 +13,7 @@ import TodoItemComponent from './interface/ToDoItemComponent';
 const appTitle = 'Afazeres';
 
 const pb = new PageBuilder();
-const projects = new Projects();
+let projects = new Projects();
 const header = new Header(appTitle);
 const footer = new Footer(appTitle, 2019);
 
@@ -95,11 +95,15 @@ const addProject = (values = false) => {
   generateProject(project);
 };
 
+const reGenerateProjects = () => {
+  removeProjectsFromDOM();
+  generateProjects(projects.getProjects());
+};
+
 const removeProject = (element) => {
   const { id } = element.parentNode;
   projects.removeProject(id);
-  removeProjectsFromDOM();
-  generateProjects(projects.getProjects());
+  reGenerateProjects();
 };
 
 
@@ -204,12 +208,39 @@ const editItem = (ids) => {
   }, { once: true });
 };
 
+const clearStorage = () => {
+  localStorage.clear();
+  projects = new Projects();
+  generalProject.setList([]);
+  projects.addProject(generalProject);
+  reGenerateProjects();
+};
+
+
+const hasLocalStorageContent = () => localStorage.getItem('projects') !== null;
+
+const init = () => {
+  if (hasLocalStorageContent()) {
+    const initProjects = JSON.parse(localStorage.getItem('projects'));
+    projects.setProjectsFromLocalStorage(initProjects);
+    generateProjects(projects.getProjects());
+  } else {
+    localStorage.setItem('projects', JSON.stringify(projects.getProjects()));
+  }
+};
+
+window.addEventListener('beforeunload', () => {
+  localStorage.setItem('projects', JSON.stringify(projects.getProjects()));
+});
+
 document.addEventListener('click', (event) => {
   const node = event.target;
   if (node.matches('.deleteBtn')) {
     removeProject(node);
   } else if (node.matches('#new_project')) {
     addProject();
+  } else if (node.matches('#clear_storage')) {
+    clearStorage();
   } else if (node.matches('.add_icon')) {
     const [projectId] = node.parentNode.id.match(/\d+$/);
     addItem(projectId);
@@ -221,20 +252,5 @@ document.addEventListener('click', (event) => {
   }
 }, false);
 
-const hasLocalStorageContent = () => localStorage.getItem('projects') !== null;
-
-const init = () => {
-  if (hasLocalStorageContent()) {
-    const initProjects = JSON.parse(localStorage.getItem('projects'));
-    projects.setProjectsFromLocalStorage(initProjects);
-    generateProjects(projects.getProjects());
-  } // else {
-  //   localStorage.setItem('projects', JSON.stringify(projects.getProjects()));
-  // }
-};
-
-window.addEventListener('beforeunload', () => {
-  localStorage.setItem('projects', JSON.stringify(projects.getProjects()));
-});
 
 init();

@@ -15,6 +15,10 @@ export default class MainContent {
   generateContent() {
     const div = document.querySelector('.content');
     const button = document.createElement('a');
+    const clearBtn = document.createElement('a');
+    clearBtn.innerHTML = 'Reset';
+    clearBtn.className = 'waves-effect waves-light btn blue';
+    clearBtn.id = 'clear_storage';
     button.className = 'waves-effect waves-light btn modal-trigger';
     button.id = 'newProjectTrigger';
     button.href = '#newProject';
@@ -89,7 +93,7 @@ export default class MainContent {
 
 
     newProject.appendChild(form);
-    this.main.append(button, newProject, newItem, editItem);
+    this.main.append(button, clearBtn, newProject, newItem, editItem);
     if (div) this.main.removeChild(div);
     this.contentWrapper.appendChild(this.content);
     this.main.append(this.contentWrapper);
