@@ -21,12 +21,8 @@ const projectsDiv = pb.generateDiv('projects', 'projects');
 const content = document.querySelector('#content');
 const main = new MainContent(projectsDiv);
 
-const defaultProject = {
-  title: 'General',
-  description: 'Default project for all todo items',
-};
-
 const generalProject = new Project('General', 'Default project for all todo items');
+projects.addProject(generalProject);
 
 const generateMainSkeleton = () => {
   content.appendChild(header.createNav());
@@ -226,32 +222,36 @@ document.addEventListener('click', (event) => {
 }, false);
 
 
-document.addEventListener('DOMContentLoaded', () => {
-  const projects = JSON.parse(localStorage.getItem('projects'));
-  if (projects.length > 0) {
-    generateProjects(projects);
-  } else if (projects.length === 0) {
-    addProject([defaultProject.title, defaultProject.description]);
+// document.addEventListener('DOMContentLoaded', () => {
+//   const projects = JSON.parse(localStorage.getItem('projects'));
+//   if (projects.length > 0) {
+//     generateProjects(projects);
+//   } else if (projects.length === 0) {
+//     addProject([defaultProject.title, defaultProject.description]);
+//   }
+// }, { once: true });
+
+const hasLocalStorageContent = () => localStorage.getItem('projects') !== null;
+
+// const addProjects = (projs) => {
+//   projects.setProjectsFromLocalStorage(projs);
+// };
+
+const init = () => {
+  if (hasLocalStorageContent()) {
+    const initProjects = JSON.parse(localStorage.getItem('projects'));
+    
+    console.log(initProjects);
+    projects.setProjectsFromLocalStorage(initProjects);
+    generateProjects(projects.getProjects());
+    // console.log('projects: ', projects);
+  } else {
+    localStorage.setItem('projects', JSON.stringify(projects.getProjects()));
   }
-}, { once: true });
+};
 
 window.addEventListener('beforeunload', () => {
   localStorage.setItem('projects', JSON.stringify(projects.getProjects()));
 });
-
-const hasLocalStorageContent = () => localStorage.getItem('projects') !== null;
-
-const addProjects = (projects) => {
-  console.log(projects);
-};
-
-const init = () => {
-  if (hasLocalStorageContent()) {
-    const initprojects = JSON.parse(localStorage.getItem('projects'));
-    addProjects(initprojects);
-  } else {
-    projects.addProject(generalProject);
-  }
-};
 
 init();

@@ -1,8 +1,8 @@
 export default class Project {
-  constructor(title, description = '') {
+  constructor(title, description = '', list = []) {
     this.title = title;
     this.description = description;
-    this.toDoList = [];
+    this.toDoList = list;
   }
 
   getTitle() {
