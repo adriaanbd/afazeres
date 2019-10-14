@@ -33,6 +33,10 @@ export default class Project {
     return this.toDoList;
   }
 
+  setList(list) {
+    this.toDoList = list;
+  }
+
   getItemByIndex(index) {
     return this.toDoList[index];
   }
