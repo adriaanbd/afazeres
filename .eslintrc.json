@@ -15,5 +15,7 @@
         "sourceType": "module"
     },
     "rules": {
+        "no-shadow": "off",
+        "ts(8009)": "off"
     }
 }

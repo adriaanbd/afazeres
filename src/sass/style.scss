@@ -1,0 +1,19 @@
+.collection-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.todo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  .todo-header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .priority {
+    text-transform: capitalize;
+  }
+}
